@@ -787,61 +787,6 @@ function reset(){
 
 ///////////////////////////////////////////////////////////////////
 
-// Simple XOR encryption (key = 1)
-// The only purpose is to obscure it in the hash
-
-function encryptString(string){
-	var result = "";
-	for(var i=0;i<string.length;i++){
-		result += String.fromCharCode(string.charCodeAt(i)^1);
-	}
-	return result;
-}
-function decryptString(string){
-	return encryptString(string); // it's XOR, duh
-}
-
-var yourMessage = document.getElementById("your_message");
-var yourLink = document.getElementById("your_link");
-function linkChangey(){
-	if(yourMessage.value==""){
-		yourLink.value = "https://0x733.github.io/love";
-	}else{
-		yourLink.value = "https://0x733.github.io/love/#"+encodeURIComponent(encryptString(yourMessage.value));
-	}
-};
-yourMessage.onchange = linkChangey;
-yourMessage.oninput = linkChangey;
-linkChangey();
-yourLink.onclick = function(){
-	yourLink.select();
-};
-
-function socialShare(event,type){
-
-	var link = yourLink.value;
-	var title = "it's a(door)able";
-	var url = "";
-	var width = 640;
-	var height = 480;
-
-	switch(type){
-		case "stumbleupon":
-			url += "http://www.stumbleupon.com/submit?url="+encodeURIComponent(link);
-			break;
-	}
-
-	return sharePopup.call(this,event,{
-		href: url,
-		width: width,
-		height: height
-	});
-
-}
-
-
-///////////////////////////////////////////////////////////////////
-
 
 var introCanvas = document.getElementById("canvas_intro");
 introCanvas.width = window.innerWidth;
